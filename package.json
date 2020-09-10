@@ -16,13 +16,13 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "dev:react": "cross-env BROWSER=none react-scripts start",
+    "dev:react": "cross-env BROWSER=none react-app-rewired start",
     "dev:ele": "wait-on http://localhost:3000 && electron ./main.js",
-    "deve": "concurrently npm:dev:*"
+    "dev": "concurrently npm:dev:*"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,10 +40,15 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "babel-plugin-import": "^1.13.0",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
+    "customize-cra": "^1.0.0",
     "electron": "^10.1.1",
     "electron-is-dev": "^1.2.0",
+    "prettier": "^2.1.1",
+    "react-app-rewired": "^2.1.6",
     "wait-on": "^5.2.0"
   }
 }
