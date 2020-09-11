@@ -22,7 +22,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js --ext .jsx --ext .tsx src/  --fix",
+    "lint": "node ./node_modules/eslint/bin/eslint --ext .js --ext .jsx --ext .tsx src/  --fix",
     "prettier": "prettier -c --write src",
     "dev:react": "cross-env BROWSER=none react-app-rewired start",
     "dev:ele": "wait-on http://localhost:3000 && electron ./main.js",
