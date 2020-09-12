@@ -1,23 +1,20 @@
 import React, { FC } from 'react';
-// import './test.less';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
-import css from './test.module.less';
-
-const Test: FC = () => {
+const List: FC = () => {
   const history = useHistory();
   return (
-    <div className={css['test-wrapper']}>
-      <div>test aaaa</div>
+    <div>
+      this is list
       <Button
         onClick={() => {
-          history.push('/list');
+          history.push('/test');
         }}
       >
-        go to list
+        go test
       </Button>
     </div>
   );
 };
 
-export default Test;
+export default List;
