@@ -4,3 +4,5 @@ declare module '*.module.less' {
 
   export default css;
 }
+
+declare var YpRiddler;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 // import './test.less';
 import { useHistory } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 
 import css from './test.module.less';
 
@@ -42,6 +42,8 @@ const Test: FC = () => {
       <Button onClick={onFileClick}>file</Button>
 
       <Button onClick={onDialogClick}>open dialog</Button>
+
+      <Input />
     </div>
   );
 };

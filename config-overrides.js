@@ -27,7 +27,7 @@ module.exports = override(
       noIeCompat: true,
       modules: true,
       modifyVars: {
-        '@primary-color': '#1DA57A'
+        // '@primary-color': '#1DA57A'
       }
     }
   }),
