@@ -6,3 +6,7 @@ declare module '*.module.less' {
 }
 
 declare var YpRiddler;
+
+declare var __REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+
+declare module '@loadable/component'

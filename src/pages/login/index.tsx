@@ -3,6 +3,8 @@ import { useLocation, useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import { Form, Input, Button, Select, message } from 'antd';
 
+import { appApi } from '@/services';
+
 import css from './index.module.less';
 
 const { Option } = Select;
@@ -34,6 +36,15 @@ const Login: FC = (props) => {
 
   // history
   const history = useHistory();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await appApi.getNoticeList();
+      console.log(res);
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     new window.YpRiddler({
