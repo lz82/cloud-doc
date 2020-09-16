@@ -18,7 +18,7 @@ const Login: FC = (props) => {
   // 手机号check状态
   const [mobileCheckStatus, setMobileCheckStatus] = useState<checkStatus>('success');
   // 倒计时计时器
-  const timer = useRef<NodeJS.Timeout | null>(null);
+  const timer = useRef<number>(0);
   // 发送验证码按钮文本
   const [smsTxt, setSmsTxt] = useState('发送验证码');
   // 倒计时
@@ -84,6 +84,25 @@ const Login: FC = (props) => {
     });
   }, []);
 
+  // 倒计时变化的副作用
+  useEffect(() => {
+    if (countDown === 0) {
+      clearInterval(timer.current);
+      setSmsTxt('发送验证码');
+    } else {
+      if (countDown < 60) {
+        setSmsTxt(countDown + '');
+      }
+    }
+  }, [countDown]);
+
+  // 清除时间戳的副作用
+  useEffect(() => {
+    return () => {
+      clearInterval(timer.current);
+    };
+  }, []);
+
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
@@ -137,7 +156,7 @@ const Login: FC = (props) => {
         //   ...humanCheckInfo
         // });
         message.success('发送成功');
-        timer.current = setInterval(() => {
+        timer.current = window.setInterval(() => {
           setCountDown((val) => val - 1);
         }, 1000);
       } catch (err) {
