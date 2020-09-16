@@ -39,7 +39,7 @@ const Login: FC = (props) => {
     new window.YpRiddler({
       expired: 10,
       mode: 'dialog',
-      winWidth: 400,
+      winWidth: 360,
       lang: 'zh-cn', // 界面语言, 目前支持: 中文简体 zh-cn, 英语 en
       // langPack: LANG_OTHER, // 你可以通过该参数自定义语言包, 其优先级高于lang
       container: document.getElementById('cbox'),

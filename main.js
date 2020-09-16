@@ -16,7 +16,7 @@ app.on('ready', async () => {
 
   await installExtension(REACT_DEVELOPER_TOOLS);
 
-  win.loadURL('http://localhost:3000');
+  win.loadURL('http://localhost:8888');
 
   // 设置菜单
   const menu = Menu.buildFromTemplate(menuTemplate);
