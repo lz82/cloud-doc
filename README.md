@@ -1,44 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# tips
 
-## Available Scripts
+- remote
+  `10.1.2`版本中 remote 默认是关闭的，需要手动声明`webPreferences: {enableRemoteModule: true}`。
 
-In the project directory, you can run:
+- 在`typescript`中启用`css module`,需要在`react-app-env.d.ts`中做以下声明:
 
-### `yarn start`
+```
+declare module '*.module.less' {
+  const css: { readonly [key: string]: string };
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  export default css;
+}
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- install electron
+  `electron`因为需要安装`chrome`，所以需要翻墙，不要看网上那些使用镜像什么的，直接使用`cnpm install`即可，简单粗暴
 
-### `yarn test`
+- 在 electron 中使用 react-devtools 调试
+  百度搜的话很多方法都已经失效了，最新的是在`session.loadExtension`，但是还是要翻墙去下载插件
+  最方便的办法是使用`electron-devtools-installer`,同时在`main.js`中使用:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
 
-### `yarn build`
+await installExtension(REACT_DEVELOPER_TOOLS);
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+注意：这个也必须有梯子才行，因为它其实也是在打开`electron`的时候才去下载这个扩展
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- 第三方 js
+  有一些第三方的 sdk 使用方式是直接在`index.html`中引入，这时候在`typescript`中使用会报错，提示`window`中没有这个对象
+  同样也是在`react-app-env.d.ts`中`declare`一下即可。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+declare var YpRiddler;
+```
