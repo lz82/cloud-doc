@@ -62,6 +62,21 @@ const Login: FC = (props) => {
         // 异常回调
         console.error('验证服务异常');
       },
+      onSuccess: function (
+        { token, authenticate }: { token: string; authenticate: string },
+        close: Function,
+        defaultSuccess: Function
+      ) {
+        // 成功回调
+        setHumanCheckStatus(true);
+        setHumanCheckInfo({
+          token,
+          authenticate
+        });
+        // 验证成功默认样式
+        defaultSuccess(true);
+        close();
+      },
       onFail: function (code: number, msg: string, retry: Function) {
         // 失败回调
         retry();
