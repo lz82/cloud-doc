@@ -8,6 +8,8 @@ app.on('ready', async () => {
   const win = new BrowserWindow({
     width: 1200,
     height: 900,
+    minWidth: 900,
+    minHeight: 600,
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true

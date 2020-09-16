@@ -173,7 +173,7 @@ const Login: FC = (props) => {
     //   userPassword: md5(pwd),
     //   type: 'pwd'
     // });
-    history.push('/home');
+    history.push('/admin/home');
   };
 
   // 短信登录
