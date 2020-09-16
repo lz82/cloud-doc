@@ -20,7 +20,7 @@ const Login: FC = (props) => {
   // 手机号check状态
   const [mobileCheckStatus, setMobileCheckStatus] = useState<checkStatus>('success');
   // 倒计时计时器
-  const timer = useRef<NodeJS.Timeout | null>(null);
+  const timer = useRef<number>(0);
   // 发送验证码按钮文本
   const [smsTxt, setSmsTxt] = useState('发送验证码');
   // 倒计时
@@ -50,7 +50,7 @@ const Login: FC = (props) => {
     new window.YpRiddler({
       expired: 10,
       mode: 'dialog',
-      winWidth: 400,
+      winWidth: 360,
       lang: 'zh-cn', // 界面语言, 目前支持: 中文简体 zh-cn, 英语 en
       // langPack: LANG_OTHER, // 你可以通过该参数自定义语言包, 其优先级高于lang
       container: document.getElementById('cbox'),
@@ -73,11 +73,45 @@ const Login: FC = (props) => {
         // 异常回调
         console.error('验证服务异常');
       },
+      onSuccess: function (
+        { token, authenticate }: { token: string; authenticate: string },
+        close: Function,
+        defaultSuccess: Function
+      ) {
+        // 成功回调
+        setHumanCheckStatus(true);
+        setHumanCheckInfo({
+          token,
+          authenticate
+        });
+        // 验证成功默认样式
+        defaultSuccess(true);
+        close();
+      },
       onFail: function (code: number, msg: string, retry: Function) {
         // 失败回调
         retry();
       }
     });
+  }, []);
+
+  // 倒计时变化的副作用
+  useEffect(() => {
+    if (countDown === 0) {
+      clearInterval(timer.current);
+      setSmsTxt('发送验证码');
+    } else {
+      if (countDown < 60) {
+        setSmsTxt(countDown + '');
+      }
+    }
+  }, [countDown]);
+
+  // 清除时间戳的副作用
+  useEffect(() => {
+    return () => {
+      clearInterval(timer.current);
+    };
   }, []);
 
   const prefixSelector = (
@@ -133,7 +167,7 @@ const Login: FC = (props) => {
         //   ...humanCheckInfo
         // });
         message.success('发送成功');
-        timer.current = setInterval(() => {
+        timer.current = window.setInterval(() => {
           setCountDown((val) => val - 1);
         }, 1000);
       } catch (err) {
@@ -150,7 +184,7 @@ const Login: FC = (props) => {
     //   userPassword: md5(pwd),
     //   type: 'pwd'
     // });
-    history.push('/home');
+    history.push('/admin/home');
   };
 
   // 短信登录

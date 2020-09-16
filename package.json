@@ -32,8 +32,8 @@
     "eject": "react-scripts eject",
     "lint": "node ./node_modules/eslint/bin/eslint --ext .js --ext .jsx --ext .tsx src/  --fix",
     "prettier": "prettier -c --write src",
-    "dev:react": "cross-env BROWSER=none react-app-rewired start",
-    "dev:ele": "wait-on http://localhost:3000 && electron ./main.js",
+    "dev:react": "cross-env BROWSER=none PORT=8888 react-app-rewired start",
+    "dev:ele": "wait-on http://localhost:8888 && electron ./main.js",
     "dev": "concurrently npm:dev:*"
   },
   "browserslist": {
